@@ -1,0 +1,17 @@
+bands_sentinel = {
+    "coastal": ["coastal_aerosol"],
+    "blue": ["blue"],
+    "green": ["green"],
+    "red": ["red"],
+    "rededge1": ["red_edge_1"],
+    "rededge2": ["red_edge_2"],
+    "rededge3": ["red_edge_3"],
+    "nir": ["nir", "nir_1"],
+    "nir08": ["nir_narrow", "nir_2"],
+    "nir09": ["water_vapour"],
+    "swir16": ["swir_1", "swir_16"],
+    "swir22": ["swir_2", "swir_22"],
+    "aot": ["aerosol_optical_thickness"],
+    "wvp": ["scene_average_water_vapour"],
+    "scl": ["mask", "qa"],
+}

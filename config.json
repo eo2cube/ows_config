@@ -1,0 +1,131 @@
+{
+    "global": {
+        "response_headers": {
+            "Access-Control-Allow-Origin": "*"
+        },
+        "services": {
+            "wms": true,
+            "wcs": true,
+            "wmts": true
+        },
+        "published_CRSs": {
+            "EPSG:3857": {
+                "geographic": false,
+                "horizontal_coord": "x",
+                "vertical_coord": "y"
+            },
+            "EPSG:4326": {
+                "geographic": true,
+                "vertical_coord_first": true
+            },
+            "EPSG:6933": {
+                "geographic": false,
+                "horizontal_coord": "x",
+                "vertical_coord": "y"
+            },
+            "EPSG:32633": {
+                "geographic": false,
+                "horizontal_coord": "x",
+                "vertical_coord": "y"
+            }
+        },
+        "allowed_urls": [
+            "https://devows.eo2cube.org"
+        ],
+        "title": "eo2cube - OGC Web Services",
+        "abstract": "eo2cube OGC Web Services",
+        "info_url": "datacube.remote-sensing.org/",
+        "keywords": [
+            "time-series"
+        ],
+        "contact_info": {
+            "person": "Steven Hill",
+            "organisation": "Earth Observation Research Cluster",
+            "position": "",
+            "address": {
+                "type": "postal",
+                "address": "John-Skilton-Strasse 4a",
+                "city": "Wuerzburg",
+                "state": "Bavaria",
+                "postcode": "97074",
+                "country": "Germany"
+            },
+            "telephone": "+49 931 31-88493",
+            "email": "l-geofernerkundung@uni-wuerzburg.de"
+        },
+        "fees": "",
+        "access_constraints": "",
+        "translations_directory": "/env/config/ows_refactored/translations",
+        "supported_languages": [
+            "en"
+        ]
+    },
+    "wms": {
+        "max_width": 512,
+        "max_height": 512
+    },
+    "wcs": {
+        "default_geographic_CRS": "EPSG:4326",
+        "formats": {
+            "GeoTIFF": {
+                "renderers": {
+                    "1": "datacube_ows.wcs1_utils.get_tiff",
+                    "2": "datacube_ows.wcs2_utils.get_tiff"
+                },
+                "mime": "image/geotiff",
+                "extension": "tif",
+                "multi-time": false
+            },
+            "netCDF": {
+                "renderers": {
+                    "1": "datacube_ows.wcs1_utils.get_netcdf",
+                    "2": "datacube_ows.wcs2_utils.get_netcdf"
+                },
+                "mime": "application/x-netcdf",
+                "extension": "nc",
+                "multi-time": true
+            }
+        },
+        "native_format": "GeoTIFF"
+    },
+    "layers": [
+        {
+            "title": "Satellitenbilder",
+            "abstract": "Echtfarbaufnahmen von Sentinel-2A/B",
+            "layers": [
+                {
+                    "include": "ows_refactored.surface_reflectance.ows_s2_cfg.layer",
+                    "type": "python"
+                }
+            ]
+        },
+        {
+            "title": "Vegetationsindizes",
+            "abstract": "Zum Beispiel NDVI und EVI, berechnet aus Aufnahmen von Sentinel-2A/B",
+            "layers": [
+                {
+                    "include": "ows_refactored.s2_vi.layers.ndvi",
+                    "type": "python"
+                },
+                {
+                    "include": "ows_refactored.s2_vi.layers.evi",
+                    "type": "python"
+                }
+            ]
+        },
+        {
+            "title": "Vegetationsindex-Differenzen",
+            "abstract": "Abweichung vom langjährigen Mittel für verschiedene Fruchtarten",
+            "layers": [
+                {
+                    "include": "ows_refactored.s2_vi.layers.ndvi_diff",
+                    "type": "python"
+                },
+                {
+                    "include": "ows_refactored.s2_vi.layers.evi_diff",
+                    "type": "python"
+                }
+            ]
+        }
+    ]
+}
