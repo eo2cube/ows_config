@@ -8,11 +8,12 @@ def ndvi_diff(data):
 
 def evi(data):
     castdata = data.astype("float32")
+    normdata = castdata / 10000
     G = 2.5
     C1 = 6
     C2 = 7.5
     L = 1
-    return G * ((castdata["nir"] - castdata["red"]) / (castdata["nir"] + C1*castdata["red"] - C2*castdata["blue"] + L))
+    return G * ((normdata["nir"] - normdata["red"]) / (normdata["nir"] + C1*normdata["red"] - C2*normdata["blue"] + L))
 
 def evi_diff(data):
     datetime = data.time
