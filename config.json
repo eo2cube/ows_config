@@ -30,7 +30,7 @@
             }
         },
         "allowed_urls": [
-            "https://devows.eo2cube.org"
+            "https://owsdev.eo2cube.org"
         ],
         "title": "eo2cube - OGC Web Services",
         "abstract": "eo2cube OGC Web Services",
