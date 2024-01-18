@@ -80,12 +80,12 @@ ndvi_diff = {
                     "function": "ows_refactored.s2_vi.formulas.ndvi_diff",
                 },
                 "mpl_ramp": "BrBG",
-                "range": [-4 * 0.06434399394499828, 4 * 0.06434399394499828],
+                "range": [-0.3, 0.3],
                 "legend": {
                     "title": "NDVI-Differenz",
-                    "begin": "-0.26",  # apparently must be outside the range of `range`
-                    "end": "0.26",
-                    "ticks": ["-0.25", "-0.19", "-0.13", "-0.06", "0", "0.06", "0.13", "0.19", "0.25"]
+                    "begin": "-0.3",
+                    "end": "0.3",
+                    "ticks": ["-0.3", "-0.2", "-0.1", "0", "0.1", "0.2", "0.3"],
                 },
             },
         ],
@@ -111,12 +111,12 @@ evi_diff = {
                     "function": "ows_refactored.s2_vi.formulas.evi_diff",
                 },
                 "mpl_ramp": "BrBG",
-                "range": [-4 * 0.0447305790362834, 4 * 0.0447305790362834],
+                "range": [-0.3, 0.3],
                 "legend": {
                     "title": "EVI-Differenz",
-                    "begin": "-0.18",
-                    "end": "0.18",
-                    "ticks": ["-0.18", "-0.135", "-0.09", "-0.045", "0", "0.18", "0.135", "0.09", "0.045"]
+                    "begin": "-0.3",
+                    "end": "0.3",
+                    "ticks": ["-0.3", "-0.2", "-0.1", "0", "0.1", "0.2", "0.3"],
                 },
             },
         ],
