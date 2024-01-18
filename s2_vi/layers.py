@@ -98,6 +98,59 @@ evi = {
     },
 }
 
+croptypes = {
+    "winter_wheat": "Winterweizen",
+    "spring_barley": "Sommergerste",
+    "rapeseed": "Raps",
+}
+
+vegetation_indices = {
+    "ndvi": "Normalized Difference Vegetation Index",
+    "evi": "Enhanced Vegetation Index",
+}
+
+diff = []
+for ct_key, ct_name in croptypes.items():
+    layers = []
+    for vi_key, vi_name in vegetation_indices.items():
+        layers.append({
+            "name": "s2_vi_" + vi_key + "_diff_" + ct_key,
+            "title": vi_key.upper() + "-Differenz " + ct_name,
+            "abstract": "Abweichung des " + vi_name + " vom langjährigen Mittel für die Anbaufrucht " + ct_name + " (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: DLR - Deutsches Fernerkundungsdatenzentrum, Team Agrar- und Waldökosysteme und Earth Observation Research Cluster/Universität Würzburg)",
+            **base_config,
+            **s2_c1_l2a,
+            "bands": rgb_and_nir,
+            "styling": {
+                "default_style": "brown-blue",
+                "styles": [
+                    {
+                        "name": "brown-blue",
+                        "title": vi_key.upper() + "-Differenz " + ct_name,
+                        "abstract": "von braun nach blau",
+                        "needed_bands": ["red", "green", "blue", "nir"],
+                        "index_function": {
+                            "function": "ows_refactored.s2_vi.formulas." + vi_key + "_diff",
+                            "kwargs": { "croptype": ct_key }
+                        },
+                        "mpl_ramp": "BrBG",
+                        "range": [-0.3, 0.3],
+                        "legend": {
+                            "title": vi_key.upper() + "-Differenz " + ct_name,
+                            "begin": "-0.3",
+                            "end": "0.3",
+                            "ticks": ["-0.3", "-0.2", "-0.1", "0", "0.1", "0.2", "0.3"],
+                        }
+                    },
+                ],
+            },
+        })
+    diff.append({
+        "title": "VI-Differenzen " + ct_name,
+        "abstract": "Abweichung vom langjährigen Mittel für " + ct_name,
+        "layers": layers
+    })
+
+"""
 ndvi_diff = {
     "name": "s2_vi_ndvi_diff",
     "title": "NDVI-Differenz",
@@ -159,3 +212,4 @@ evi_diff = {
         ],
     },
 }
+"""
