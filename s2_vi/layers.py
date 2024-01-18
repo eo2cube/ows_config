@@ -13,10 +13,10 @@ ndvi = {
     **s2_c1_l2a,
     "bands": rgb_and_nir,
     "styling": {
-        "default_style": "python_onthefly",
+        "default_style": "grey-brown-green",
         "styles": [
             {
-                "name": "python_onthefly",
+                "name": "grey-brown-green",
                 "title": "NDVI",
                 "abstract": colorramp_ndvi_legend_abstract,
                 "needed_bands": ["red", "green", "blue", "nir"],
@@ -41,10 +41,10 @@ evi = {
     **s2_c1_l2a,
     "bands": rgb_and_nir,
     "styling": {
-        "default_style": "python_onthefly",
+        "default_style": "grey-brown-green",
         "styles": [
             {
-                "name": "python_onthefly",
+                "name": "grey-brown-green",
                 "title": "EVI",
                 "abstract": colorramp_ndvi_legend_abstract,
                 "needed_bands": ["red", "green", "blue", "nir"],
@@ -69,10 +69,10 @@ ndvi_diff = {
     **s2_c1_l2a,
     "bands": rgb_and_nir,
     "styling": {
-        "default_style": "python_onthefly",
+        "default_style": "grey-brown-green",
         "styles": [
             {
-                "name": "python_onthefly",
+                "name": "grey-brown-green",
                 "title": "NDVI-Differenz",
                 "abstract": "von braun nach blau",
                 "needed_bands": ["red", "green", "blue", "nir"],
@@ -100,10 +100,10 @@ evi_diff = {
     **s2_c1_l2a,
     "bands": rgb_and_nir,
     "styling": {
-        "default_style": "python_onthefly",
+        "default_style": "grey-brown-green",
         "styles": [
             {
-                "name": "python_onthefly",
+                "name": "grey-brown-green",
                 "title": "EVI-Differenz",
                 "abstract": "von braun nach blau",
                 "needed_bands": ["red", "green", "blue", "nir"],
