@@ -94,7 +94,7 @@
             "abstract": "Echtfarbaufnahmen von Sentinel-2A/B",
             "layers": [
                 {
-                    "include": "ows_refactored.surface_reflectance.ows_s2_cfg.layer",
+                    "include": "ows_refactored.s2_vi.layers.rgb",
                     "type": "python"
                 }
             ]

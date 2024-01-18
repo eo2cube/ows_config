@@ -5,6 +5,43 @@ from ows_refactored.s2_vi.colorramps import colorramp_ndvi
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend_abstract
 
+rgb = {
+    "title": "Sentinel-2",
+    "name": "s2_l2a",
+    "abstract": "Räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI",
+    **base_config,
+    **s2_c1_l2a,
+    "bands": {
+        "coastal": ["coastal_aerosol"],
+        "blue": ["blue"],
+        "green": ["green"],
+        "red": ["red"],
+        "rededge1": ["red_edge_1"],
+        "rededge2": ["red_edge_2"],
+        "rededge3": ["red_edge_3"],
+        "nir": ["nir", "nir_1"],
+        "nir08": ["nir_narrow", "nir_2"],
+        "nir09": ["water_vapour"],
+        "swir16": ["swir_1", "swir_16"],
+        "swir22": ["swir_2", "swir_22"],
+        "aot": ["aerosol_optical_thickness"],
+        "wvp": ["scene_average_water_vapour"],
+        "scl": ["mask", "qa"],
+    },
+    "styling": {
+        "default_style": "simple_rgb",
+        "styles": [
+            {
+                "name": "simple_rgb",
+                "title": "Echtfarbbild",
+                "abstract": "Simples Echtfarbbild aus Kombination des roten, grünen und blauen Bandes",
+                "components": {"red": {"red": 1.0}, "green": {"green": 1.0}, "blue": {"blue": 1.0}},
+                "scale_range": [0.0, 3000.0],
+            }
+        ],
+    },
+}
+
 ndvi = {
     "name": "s2_vi_ndvi",
     "title": "NDVI",
