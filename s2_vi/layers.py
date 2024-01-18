@@ -8,7 +8,7 @@ from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend_abstract
 ndvi = {
     "name": "s2_vi_ndvi",
     "title": "NDVI",
-    "abstract": "Normalized Difference Vegetation Index",  # also multiline possible with """\nLorem ipsum\n"""
+    "abstract": "Normalized Difference Vegetation Index (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",  # also multiline possible with """\nLorem ipsum\n"""
     **base_config,
     **s2_c1_l2a,
     "bands": rgb_and_nir,
@@ -36,7 +36,7 @@ ndvi = {
 evi = {
     "name": "s2_vi_evi",
     "title": "EVI",
-    "abstract": "Enhanced Vegetation Index",  # also multiline possible with """\nLorem ipsum\n"""
+    "abstract": "Enhanced Vegetation Index (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",  # also multiline possible with """\nLorem ipsum\n"""
     **base_config,
     **s2_c1_l2a,
     "bands": rgb_and_nir,
@@ -64,7 +64,7 @@ evi = {
 ndvi_diff = {
     "name": "s2_vi_ndvi_diff",
     "title": "NDVI-Differenz",
-    "abstract": "Abweichung des Normalized Difference Vegetation Index vom langjährigen Mittel für verschiedene Fruchtarten",  # also multiline possible with """\nLorem ipsum\n"""
+    "abstract": "Abweichung des Normalized Difference Vegetation Index vom langjährigen Mittel für die Anbaufrucht Raps (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: DLR - Deutsches Fernerkundungsdatenzentrum, Team Agrar- und Waldökosysteme und Earth Observation Research Cluster/Universität Würzburg)",
     **base_config,
     **s2_c1_l2a,
     "bands": rgb_and_nir,
@@ -95,7 +95,7 @@ ndvi_diff = {
 evi_diff = {
     "name": "s2_vi_evi_diff",
     "title": "EVI-Differenz",
-    "abstract": "Abweichung des Enhanced Vegetation Index vom langjährigen Mittel für verschiedene Fruchtarten",  # also multiline possible with """\nLorem ipsum\n"""
+    "abstract": "Abweichung des Enhanced Vegetation Index vom langjährigen Mittel für die Anbaufrucht Raps (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: DLR - Deutsches Fernerkundungsdatenzentrum, Team Agrar- und Waldökosysteme und Earth Observation Research Cluster/Universität Würzburg)",
     **base_config,
     **s2_c1_l2a,
     "bands": rgb_and_nir,

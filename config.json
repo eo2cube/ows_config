@@ -115,7 +115,7 @@
         },
         {
             "title": "Vegetationsindex-Differenzen",
-            "abstract": "Abweichung vom langjährigen Mittel für verschiedene Fruchtarten",
+            "abstract": "Abweichung vom langjährigen Mittel für verschiedene Anbaufrüchte",
             "layers": [
                 {
                     "include": "ows_refactored.s2_vi.layers.ndvi_diff",
