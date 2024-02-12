@@ -1,6 +1,6 @@
 from ows_refactored.s2_vi.templates import base_config
 from ows_refactored.s2_vi.templates import s2_c1_l2a
-from ows_refactored.s2_vi.templates import rgb_and_nir
+from ows_refactored.s2_vi.templates import rgb_nir, rgb_nir_scl
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend_abstract
@@ -48,7 +48,7 @@ ndvi = {
     "abstract": "Normalized Difference Vegetation Index (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",  # also multiline possible with """\nLorem ipsum\n"""
     **base_config,
     **s2_c1_l2a,
-    "bands": rgb_and_nir,
+    "bands": rgb_nir,
     "styling": {
         "default_style": "grey-brown-green",
         "styles": [
@@ -76,7 +76,7 @@ evi = {
     "abstract": "Enhanced Vegetation Index (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",  # also multiline possible with """\nLorem ipsum\n"""
     **base_config,
     **s2_c1_l2a,
-    "bands": rgb_and_nir,
+    "bands": rgb_nir,
     "styling": {
         "default_style": "grey-brown-green",
         "styles": [
@@ -119,7 +119,10 @@ for ct_key, ct_name in croptypes.items():
             "abstract": "Abweichung des " + vi_name + " vom langjährigen Mittel für die Anbaufrucht " + ct_name + " (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: DLR - Deutsches Fernerkundungsdatenzentrum, Team Agrar- und Waldökosysteme und Earth Observation Research Cluster/Universität Würzburg)",
             **base_config,
             **s2_c1_l2a,
-            "bands": rgb_and_nir,
+            "bands": rgb_nir_scl,
+            "flags": [
+                { "band": "scl" }
+            ],
             "styling": {
                 "default_style": "brown-blue",
                 "styles": [
@@ -127,11 +130,14 @@ for ct_key, ct_name in croptypes.items():
                         "name": "brown-blue",
                         "title": vi_key.upper() + "-Differenz " + ct_name,
                         "abstract": "von braun nach blau",
-                        "needed_bands": ["red", "green", "blue", "nir"],
+                        "needed_bands": ["red", "green", "blue", "nir", "scl"],
                         "index_function": {
                             "function": "ows_refactored.s2_vi.formulas." + vi_key + "_diff",
                             "kwargs": { "croptype": ct_key }
                         },
+                        "pq_masks": [
+                            { "band": "scl", "values": [4] },   # only keep 4 = vegetation
+                        ],
                         "mpl_ramp": "BrBG",
                         "range": [-0.3, 0.3],
                         "legend": {

@@ -19,10 +19,14 @@ s2_c1_l2a = {
     "native_resolution": [10.0, -10.0],
 }
 
-rgb_and_nir = {
+rgb_nir = {
     "red": [],
     "green": [],
     "blue": [],
     "nir": [],
 }
 
+rgb_nir_scl = {
+    **rgb_nir,
+    "scl": [],
+}
