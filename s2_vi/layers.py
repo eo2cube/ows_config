@@ -136,7 +136,7 @@ for ct_key, ct_name in croptypes.items():
                             "kwargs": { "croptype": ct_key }
                         },
                         "pq_masks": [
-                            { "band": "scl", "values": [4] },   # only keep 4 = vegetation
+                            { "band": "scl", "values": [4, 5] },   # only keep 4 = vegetation and 5 = not vegetated
                         ],
                         "mpl_ramp": "BrBG",
                         "range": [-0.3, 0.3],
