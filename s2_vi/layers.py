@@ -100,8 +100,12 @@ evi = {
 
 croptypes = {
     "winter_wheat": "Winterweizen",
+    "winter_barley": "Wintergerste",
     "spring_barley": "Sommergerste",
     "rapeseed": "Raps",
+    "maize": "Mais",
+    "potatoes": "Kartoffeln",
+    "sugar_beet": "Zuckerrüben",
 }
 
 vegetation_indices = {
