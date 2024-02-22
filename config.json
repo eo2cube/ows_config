@@ -120,6 +120,14 @@
                 "include": "ows_refactored.s2_vi.layers.diff",
                 "type": "python"
             }
+        },
+        {
+            "title": "Normierte Vegetationsindex-Differenzen",
+            "abstract": "Abweichung vom langjährigen Mittel für verschiedene Anbaufrüchte in Vielfachen der jeweiligen Standardabweichung",
+            "layers": {
+                "include": "ows_refactored.s2_vi.layers.diff_norm",
+                "type": "python"
+            }
         }
     ]
 }

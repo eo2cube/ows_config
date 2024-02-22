@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from ows_refactored.s2_vi.templates import base_config
 from ows_refactored.s2_vi.templates import s2_c1_l2a
 from ows_refactored.s2_vi.templates import rgb_nir, rgb_nir_scl
@@ -159,6 +161,22 @@ for ct_key, ct_name in croptypes.items():
         "abstract": "Abweichung vom langjährigen Mittel für " + ct_name,
         "layers": layers
     })
+
+diff_norm = deepcopy(diff)
+for entry in diff_norm:
+    entry['title'] = "Normierte " + entry['title']
+    entry['abstract'] += " in Vielfachen der Standardabweichung"
+    for layer in entry['layers']:
+        layer['title'] = "Normierte " + layer['title']
+        layer['abstract'] = layer['abstract'].replace("(", "in Vielfachen der Standardabweichung (")
+        layer['name'] = layer['name'].replace("_diff_", "_diff_norm_")
+        for style in layer['styling']['styles']:
+            style['index_function']['function'] += "_norm"
+            style['title'] = "Normierte " + style['title']
+            style['range'] = [-1.0, 1.0]
+            style['legend']['begin'] = "-1.0"
+            style['legend']['end'] = "1.0"
+            style['legend']['ticks'] = ["-1.0", "-0.5", "0.0", "0.5", "1.0"]
 
 """
 ndvi_diff = {

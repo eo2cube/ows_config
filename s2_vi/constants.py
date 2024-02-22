@@ -56,4 +56,6 @@ def read_data_from_csv(filename):
 
 # call that function for all data that is needed
 ndvi_means = read_data_from_csv('/home/datacube/ows_refactored/s2_vi/DLR_vegetation-indices-multiyear/ndvi_means_2018-2021.csv')
+ndvi_stds = read_data_from_csv('/home/datacube/ows_refactored/s2_vi/DLR_vegetation-indices-multiyear/ndvi_stds_2018-2021.csv')
 evi_means = read_data_from_csv('/home/datacube/ows_refactored/s2_vi/DLR_vegetation-indices-multiyear/evi_means_2018-2021.csv')
+evi_stds = read_data_from_csv('/home/datacube/ows_refactored/s2_vi/DLR_vegetation-indices-multiyear/evi_stds_2018-2021.csv')
