@@ -3,12 +3,13 @@ from datacube_ows.wcs1_utils import get_tiff
 from numpy import nan
 
 # fake the two BandIndex functions that are used by get_tiff (band_label, nodata_val) and the one that is called in some error situations (band_labels)
-# everything is hardcoded
 class FakeBandIndex:
+    def __init__(self, band_name):
+        self.band_name = band_name
     def band_label(self, band):
-        return "index_function"
+        return self.band_name
     def band_labels(self):
-        return ["index_function"]
+        return [self.band_name]
     def nodata_val(self, band):
         return nan
 
@@ -28,6 +29,6 @@ def as_tiff_wcs1(req, data):
     masked = dataset.where(mask, nan)
 
     # overwrite BandIndex which is used in get_tiff but of course doesn't match the structure of the data anymore
-    req.product.band_idx = FakeBandIndex()  # very hacky...
+    req.product.band_idx = FakeBandIndex(req.args['coverage'])  # very hacky...
     # do the TIFF conversion with the normal function that datacube-ows would usually use anyway
     return get_tiff(req, masked)
