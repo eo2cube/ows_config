@@ -2,6 +2,7 @@ from copy import deepcopy
 
 from ows_refactored.s2_vi.templates import base_config
 from ows_refactored.s2_vi.templates import s2_c1_l2a
+from ows_refactored.s2_vi.templates import vegetation_params
 from ows_refactored.s2_vi.templates import rgb_nir, rgb_nir_scl
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend
@@ -177,6 +178,80 @@ for entry in diff_norm:
             style['legend']['begin'] = "-1.0"
             style['legend']['end'] = "1.0"
             style['legend']['ticks'] = ["-1.0", "-0.5", "0.0", "0.5", "1.0"]
+
+lai = {
+    "name": "s2_vp_lai",
+    "title": "LAI",
+    "abstract": "Leaf Area Index (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",
+    **base_config,
+    **vegetation_params,
+    "bands": {
+        "lai": ["lai"],
+    },
+    "styling": {
+        "default_style": "red-green",
+        "styles": [
+            {
+                "name": "red-green",
+                "title": "LAI",
+                "abstract": "Leaf Area Index",
+                "needed_bands": ["lai"],
+                "index_function": {
+                    "function": "datacube_ows.band_utils.single_band",
+                    "mapped_bands": True,
+                    "kwargs": {
+                        "band": "lai"
+                    },
+                },
+                "mpl_ramp": "RdYlGn",
+                "range": [0, 6],
+                "legend": {
+                    "title": "LAI",
+                    "begin": "0.0",
+                    "end": "6.0",
+                    "ticks": ["0.0", "1.0", "2.0", "3.0", "4.0", "5.0", "6.0"],
+                },
+            },
+        ],
+    },
+}
+
+bm = {
+    "name": "s2_vp_bm",
+    "title": "Biomasse Winterweizen",
+    "abstract": "Biomasse in t/ha für Winterweizen (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",
+    **base_config,
+    **vegetation_params,
+    "bands": {
+        "bm": ["bm"],
+    },
+    "styling": {
+        "default_style": "red-green",
+        "styles": [
+            {
+                "name": "red-green",
+                "title": "Biomasse",
+                "abstract": "Biomasse in t/ha",
+                "needed_bands": ["bm"],
+                "index_function": {
+                    "function": "datacube_ows.band_utils.single_band",
+                    "mapped_bands": True,
+                    "kwargs": {
+                        "band": "bm"
+                    },
+                },
+                "mpl_ramp": "RdYlGn",
+                "range": [0, 60],
+                "legend": {
+                    "title": "Biomasse [t/ha]",
+                    "begin": "0.0",
+                    "end": "60.0",
+                    "ticks": ["0", "10", "20", "30", "40", "50", "60"],
+                },
+            },
+        ],
+    },
+}
 
 """
 ndvi_diff = {

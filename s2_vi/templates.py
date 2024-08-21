@@ -19,6 +19,12 @@ s2_c1_l2a = {
     "native_resolution": [10.0, -10.0],
 }
 
+vegetation_params = {
+    "product_name": "vegetation_params",
+    "native_crs": "EPSG:32633",
+    "native_resolution": [10.0, -10.0],
+}
+
 rgb_nir = {
     "red": [],
     "green": [],
