@@ -180,9 +180,9 @@ for entry in diff_norm:
             style['legend']['ticks'] = ["-1.0", "-0.5", "0.0", "0.5", "1.0"]
 
 lai = {
-    "name": "s2_vp_lai",
-    "title": "LAI",
-    "abstract": "Leaf Area Index (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",
+    "name": "s2_vp_lai_winter_wheat",
+    "title": "LAI Winterweizen",
+    "abstract": "Leaf Area Index für Winterweizen, Wochenmittel (Mo-So), Ableitung mittels Gaussian Process Regression - trainiert auf der MISPEL Hyperspektraldatenbank (räumliche Auflösung: 10m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: JKI - Institut für Pflanzenbau und Bodenkunde, FLF)",
     **base_config,
     **vegetation_params,
     "bands": {
@@ -193,8 +193,8 @@ lai = {
         "styles": [
             {
                 "name": "red-green",
-                "title": "LAI",
-                "abstract": "Leaf Area Index",
+                "title": "LAI Winterweizen",
+                "abstract": "Leaf Area Index für Winterweizen",
                 "needed_bands": ["lai"],
                 "index_function": {
                     "function": "datacube_ows.band_utils.single_band",
@@ -217,9 +217,9 @@ lai = {
 }
 
 bm = {
-    "name": "s2_vp_bm",
+    "name": "s2_vp_bm_winter_wheat",
     "title": "Biomasse Winterweizen",
-    "abstract": "Biomasse in t/ha für Winterweizen (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI)",
+    "abstract": "Biomasse [t/ha] für Winterweizen, Wochenmittel (Mo-So), Ableitung mittels Gaussian Process Regression - trainiert auf der MISPEL Hyperspektraldatenbank (räumliche Auflösung: 10m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: JKI - Institut für Pflanzenbau und Bodenkunde, FLF)",
     **base_config,
     **vegetation_params,
     "bands": {
@@ -230,8 +230,8 @@ bm = {
         "styles": [
             {
                 "name": "red-green",
-                "title": "Biomasse",
-                "abstract": "Biomasse in t/ha",
+                "title": "Biomasse Winterweizen",
+                "abstract": "Biomasse [t/ha] für Winterweizen",
                 "needed_bands": ["bm"],
                 "index_function": {
                     "function": "datacube_ows.band_utils.single_band",
