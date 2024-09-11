@@ -1,6 +1,7 @@
 import json
 from shapely.geometry import shape, Point
 import xarray as xr
+import numpy as np
 
 def get_landscape(data):
     # for simplicity: use coordinate of point in the center of the bbox
@@ -27,5 +28,15 @@ def get_crop_stats(data, croptype, treatment, index):
     stats = xr.load_dataset('/home/datacube/ows_refactored/s2_vi/DLR_crop_statistics/crop_statistics.nc')
     landscape = get_landscape(data)
     timeline = stats.sel(landscape=landscape, crop=croptype, treatment=treatment, index=index)
-    day = timeline.sel({'date': data.time.values if data.time.size == 1 else data.time.values[0]}, method = "nearest")
+    # GetMap provides an array, GetFeatureInfo not -> handle like in `get_landscape` above
+    date = data.time.values if data.time.size == 1 else data.time.values[0]
+    # if the requested date is newer than the newest date in the reference dataset, subtract one year until the reference period has been reached
+    # this needs to be done to keep the season correct, otherwise `method = nearest` might snap e.g. 2024-05-02 to 2023-10-31, producing very wrong results
+    while date > stats.date.max().values:   # use `.values`, not `.item()`, because the latter would convert the value to a float
+        date -= np.timedelta64(365, 'D')    # for some reason `(1, 'Y')` doesn't work, so we have to do 365 days instead, which should be good enough even if there is a leap year
+    # the same with dates that are before the reference period
+    while date < stats.date.min().values:
+        date += np.timedelta64(365, 'D')
+    # find closest data point in reference timeseries and return it
+    day = timeline.sel({'date': date}, method = "nearest")
     return day.means.item(), day.stds.item()
