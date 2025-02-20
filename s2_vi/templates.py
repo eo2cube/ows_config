@@ -25,6 +25,12 @@ vegetation_params = {
     "native_resolution": [10.0, -10.0],
 }
 
+soil_params = {
+    "product_name": "soil_params",
+    "native_crs": "EPSG:32633",
+    "native_resolution": [30.0, -30.0],
+}
+
 rgb_nir = {
     "red": [],
     "green": [],

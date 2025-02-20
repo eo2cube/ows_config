@@ -142,6 +142,16 @@
                     "type": "python"
                 }
             ]
+        },
+        {
+            "title": "Bodenparameter",
+            "abstract": "Soil Organic Carbon",
+            "layers": [
+                {
+                    "include": "ows_refactored.s2_vi.layers.soc",
+                    "type": "python"
+                }
+            ]
         }
     ]
 }

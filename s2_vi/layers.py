@@ -2,7 +2,7 @@ from copy import deepcopy
 
 from ows_refactored.s2_vi.templates import base_config
 from ows_refactored.s2_vi.templates import s2_c1_l2a
-from ows_refactored.s2_vi.templates import vegetation_params
+from ows_refactored.s2_vi.templates import vegetation_params, soil_params
 from ows_refactored.s2_vi.templates import rgb_nir, rgb_nir_scl
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend
@@ -247,6 +247,43 @@ bm = {
                     "begin": "0.0",
                     "end": "60.0",
                     "ticks": ["0", "10", "20", "30", "40", "50", "60"],
+                },
+            },
+        ],
+    },
+}
+
+soc = {
+    "name": "soc_demmin",
+    "title": "Soil Organic Carbon",
+    "abstract": "Soil Organic Carbon (SOC) [g/kg] basierend auf Bare-Soil-Pixels (2020-2021, Median, räumliche Auflösung: 30m, genutzte Satellitensensoren: ASI PRISMA (hyperspektral), Quelle: GFZ)",
+    **base_config,
+    **soil_params,
+    "bands": {
+        "soc": ["soc"],
+    },
+    "styling": {
+        "default_style": "cividis",
+        "styles": [
+            {
+                "name": "cividis",
+                "title": "Soil Organic Carbon",
+                "abstract": "Soil Organic Carbon [g/kg]",
+                "needed_bands": ["soc"],
+                "index_function": {
+                    "function": "datacube_ows.band_utils.single_band",
+                    "mapped_bands": True,
+                    "kwargs": {
+                        "band": "soc"
+                    },
+                },
+                "mpl_ramp": "cividis",
+                "range": [2, 22],
+                "legend": {
+                    "title": "Soil Organic Carbon [g/kg]",
+                    "begin": "2.0",
+                    "end": "22.0",
+                    "ticks": ["2", "7", "12", "17", "22"],
                 },
             },
         ],
