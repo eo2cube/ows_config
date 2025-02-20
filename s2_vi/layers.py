@@ -277,7 +277,7 @@ soc = {
                         "band": "soc"
                     },
                 },
-                "mpl_ramp": "cividis",
+                "mpl_ramp": "cividis_r",
                 "range": [2, 22],
                 "legend": {
                     "title": "Soil Organic Carbon [g/kg]",
