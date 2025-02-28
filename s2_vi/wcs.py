@@ -10,6 +10,10 @@ class FakeBandIndex:
         return self.band_name
     def band_labels(self):
         return [self.band_name]
+    def locale_band(self, name_alias):
+        return self.band_name
+    def dtype_size(self, name_alias):
+        return 8
     def nodata_val(self, band):
         return nan
 
@@ -29,6 +33,6 @@ def as_tiff_wcs1(req, data):
     masked = dataset.where(mask, nan)
 
     # overwrite BandIndex which is used in get_tiff but of course doesn't match the structure of the data anymore
-    req.product.band_idx = FakeBandIndex(req.args['coverage'])  # very hacky...
+    req.product.band_idx = FakeBandIndex('index_function') #req.args['coverage'])  # very hacky...
     # do the TIFF conversion with the normal function that datacube-ows would usually use anyway
     return get_tiff(req, masked)
