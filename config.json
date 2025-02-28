@@ -130,6 +130,15 @@
             }
         },
         {
+            "title": "TEST: Precalculated",
+            "layers": [
+                {
+                    "include": "ows_refactored.s2_vi.layers.diff_precalculated",
+                    "type": "python"
+                }
+            ]
+        },
+        {
             "title": "Vegetationsparameter",
             "abstract": "Zum Beispiel LAI und Biomasse, modelliert aus Aufnahmen von Sentinel-2A/B",
             "layers": [
