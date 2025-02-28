@@ -180,6 +180,92 @@ for entry in diff_norm:
             style['legend']['end'] = "1.0"
             style['legend']['ticks'] = ["-1.0", "-0.5", "0.0", "0.5", "1.0"]
 
+scl = {
+    "title": "Sentinel-2 Scene Classification Layer (SCL)",
+    "name": "s2_l2a_scl",
+    "abstract": "Räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI",
+    **base_config,
+    **s2_c1_l2a,
+    "bands": {
+        "scl": ["mask", "qa"],
+    },
+    "styling": {
+        "default_style": "sentinelhub-ramp",
+        "styles": [
+            {
+                "name": "sentinelhub-ramp",
+                "title": "Palette nach Sentinel-Hub",
+                "abstract": "Siehe https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/scene-classification/ für Legende",
+                "needed_bands": ["scl"],
+                "value_map": {
+                    "scl": [
+                        {
+                            "title": "No Data (Missing data)",
+                            "values": [0],
+                            "color": "#000000",
+                        },
+                        {
+                            "title": "Saturated or defective pixel",
+                            "values": [1],
+                            "color": "#ff0000",
+                        },
+                        {
+                            "title": "Topographic casted shadows",
+                            "values": [2],
+                            "color": "#2f2f2f",
+                        },
+                        {
+                            "title": "Cloud shadows",
+                            "values": [3],
+                            "color": "#643200",
+                        },
+                        {
+                            "title": "Vegetation",
+                            "values": [4],
+                            "color": "#00a000",
+                        },
+                        {
+                            "title": "Not-vegetated",
+                            "values": [5],
+                            "color": "#ffe65a",
+                        },
+                        {
+                            "title": "Water",
+                            "values": [6],
+                            "color": "#0000ff",
+                        },
+                        {
+                            "title": "Unclassified",
+                            "values": [7],
+                            "color": "#808080",
+                        },
+                        {
+                            "title": "Cloud medium probability",
+                            "values": [8],
+                            "color": "#c0c0c0",
+                        },
+                        {
+                            "title": "Cloud high probability",
+                            "values": [9],
+                            "color": "#ffffff",
+                        },
+                        {
+                            "title": "Thin cirrus",
+                            "values": [10],
+                            "color": "#64c8ff",
+                        },
+                        {
+                            "title": "Snow or ice",
+                            "values": [11],
+                            "color": "#ff96ff",
+                        },
+                    ]
+                }
+            }
+        ],
+    },
+}
+
 lai = {
     "name": "s2_vp_lai_winter_wheat",
     "title": "LAI Winterweizen",

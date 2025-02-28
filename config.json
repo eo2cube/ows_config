@@ -96,6 +96,10 @@
                 {
                     "include": "ows_refactored.s2_vi.layers.rgb",
                     "type": "python"
+                },
+                {
+                    "include": "ows_refactored.s2_vi.layers.scl",
+                    "type": "python"
                 }
             ]
         },
