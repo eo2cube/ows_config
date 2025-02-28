@@ -9,7 +9,7 @@ from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend
 from ows_refactored.s2_vi.colorramps import colorramp_ndvi_legend_abstract
 
 rgb = {
-    "title": "Sentinel-2",
+    "title": "Sentinel-2 optisch RGB",
     "name": "s2_l2a",
     "abstract": "Räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI",
     **base_config,
@@ -120,9 +120,10 @@ diff = []
 for ct_key, ct_name in croptypes.items():
     layers = []
     for vi_key, vi_name in vegetation_indices.items():
+        title = vi_key.upper() + "-Differenz " + ct_name
         layers.append({
             "name": "s2_vi_" + vi_key + "_diff_" + ct_key,
-            "title": vi_key.upper() + "-Differenz " + ct_name,
+            "title": title,
             "abstract": "Abweichung des " + vi_name + " vom langjährigen Mittel für die Anbaufrucht " + ct_name + " (räumliche Auflösung: 10 m, genutzte Satellitensensoren: Sentinel-2 MSI, Quelle: DLR - Deutsches Fernerkundungsdatenzentrum, Team Agrar- und Waldökosysteme und Earth Observation Research Cluster/Universität Würzburg)",
             **base_config,
             **s2_c1_l2a,
@@ -135,7 +136,7 @@ for ct_key, ct_name in croptypes.items():
                 "styles": [
                     {
                         "name": "brown-blue",
-                        "title": vi_key.upper() + "-Differenz " + ct_name,
+                        "title": title,
                         "abstract": "von braun nach blau",
                         "needed_bands": ["red", "green", "blue", "nir", "scl"],
                         "index_function": {
@@ -148,7 +149,7 @@ for ct_key, ct_name in croptypes.items():
                         "mpl_ramp": "BrBG",
                         "range": [-0.3, 0.3],
                         "legend": {
-                            "title": vi_key.upper() + "-Differenz " + ct_name,
+                            "title": title,
                             "begin": "-0.3",
                             "end": "0.3",
                             "ticks": ["-0.3", "-0.2", "-0.1", "0", "0.1", "0.2", "0.3"],
@@ -173,8 +174,8 @@ for entry in diff_norm:
         layer['name'] = layer['name'].replace("_diff_", "_diff_norm_")
         for style in layer['styling']['styles']:
             style['index_function']['function'] += "_norm"
-            style['title'] = "Normierte " + style['title']
             style['range'] = [-1.0, 1.0]
+            style['legend']['title'] = "Normierte " + style['legend']['title']
             style['legend']['begin'] = "-1.0"
             style['legend']['end'] = "1.0"
             style['legend']['ticks'] = ["-1.0", "-0.5", "0.0", "0.5", "1.0"]
