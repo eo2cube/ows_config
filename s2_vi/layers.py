@@ -354,3 +354,84 @@ evi_diff = {
     },
 }
 """
+
+diff_precalculated = {
+    "name": "s2_vi",
+    "title": "EVI",
+    "abstract": "Enhanced Vegetation Index over Mecklenburg-Vorpommern on 15th July 2023",
+    **base_config,
+    "product_name": "s2_vi",
+    "bands": { "evi": "evi" },
+    "native_crs": "EPSG:32633",
+    "native_resolution": [10.0, -10.0],
+    "styling": {
+        "default_style": "ndvi_scale",
+        "styles": [
+            {
+                "name": "simple_rgb",
+                "title": "Simple RGB",
+                "abstract": "Simple true-colour image, using the red, green and blue bands",
+                "components": {"red": {"evi": 1.0}, "green": {"evi": 2.0}, "blue": {"evi": 1.0}},
+                "scale_range": [-10.0, 10.0]
+            },
+            {
+                "name": "colourramp",
+                "title": "Colour ramp",
+                "abstract": "Lorem ipsum",
+                "needed_bands": ["evi"],
+                "index_function": {
+                        "function": "datacube_ows.band_utils.single_band",
+                        "mapped_bands": True,
+                        "kwargs": {
+                            "band": "evi"
+                        }
+                },
+                "color_ramp": [
+                        {"value": -1.0, "color": "#0000FF"},
+                        {"value": -0.2, "color": "#005050"},
+                        {"value": -0.1, "color": "#505050"},
+                        {"value": -0.01, "color": "#303030"},
+                        {"value": 0.0, "color": "black"},
+                        {"value": 0.01, "color": "#303000"},
+                        {"value": 0.5, "color": "#707030"},
+                        {"value": 1.0, "color": "#FF9090"}
+                ]
+            },
+            {
+                "name": "ndvi_scale",
+                "title": "NDVI scale",
+                "abstract": "Taken from OpenLayers example",
+                "needed_bands": ["evi"],
+                "index_function": {
+                        "function": "datacube_ows.band_utils.single_band",
+                        "mapped_bands": True,
+                        "kwargs": {
+                            "band": "evi"
+                        }
+                    },
+                "color_ramp": [
+                    {"value": -0.2,   "color": "#bfbfbf"},
+                    {"value": -0.1,   "color": "#dbdbdb"},
+                    {"value":  0,     "color": "#ffffe0"},
+                    {"value":  0.025, "color": "#fffacc"},
+                    {"value":  0.05,  "color": "#ede8b5"},
+                    {"value":  0.075, "color": "#ded99c"},
+                    {"value":  0.1,   "color": "#ccc782"},
+                    {"value":  0.125, "color": "#bdb86b"},
+                    {"value":  0.15,  "color": "#b0c261"},
+                    {"value":  0.175, "color": "#a3cc59"},
+                    {"value":  0.2,   "color": "#91bf52"},
+                    {"value":  0.25,  "color": "#80b347"},
+                    {"value":  0.3,   "color": "#70a340"},
+                    {"value":  0.35,  "color": "#619636"},
+                    {"value":  0.4,   "color": "#4f8a2e"},
+                    {"value":  0.45,  "color": "#407d24"},
+                    {"value":  0.5,   "color": "#306e1c"},
+                    {"value":  0.55,  "color": "#216112"},
+                    {"value":  0.6,   "color": "#0f540a"},
+                    {"value":  0.65,  "color": "#004500"}
+                ]
+            }
+        ]
+    }
+}
