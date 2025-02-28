@@ -180,6 +180,26 @@ for entry in diff_norm:
             style['legend']['end'] = "1.0"
             style['legend']['ticks'] = ["-1.0", "-0.5", "0.0", "0.5", "1.0"]
 
+# add variants with differing masking options as additional styles
+for entry in diff_norm:
+    for layer in entry['layers']:
+        layer['styling']['styles'].append(deepcopy(layer['styling']['styles'][0]))
+        layer['styling']['styles'].append(deepcopy(layer['styling']['styles'][0]))
+        layer['styling']['styles'].append(deepcopy(layer['styling']['styles'][0]))
+        layer['styling']['styles'].append(deepcopy(layer['styling']['styles'][0]))
+        layer['styling']['styles'][1]['name'] += "_unmasked"
+        layer['styling']['styles'][1]['title'] += " (unmaskiert)"
+        layer['styling']['styles'][1]['pq_masks'] = []
+        layer['styling']['styles'][2]['name'] += "_masked456"
+        layer['styling']['styles'][2]['title'] += " (4,5,6 sichtbar)"
+        layer['styling']['styles'][2]['pq_masks'][0]['values'] = [4,5,6]
+        layer['styling']['styles'][3]['name'] += "_masked4567"
+        layer['styling']['styles'][3]['title'] += " (4,5,6,7 sichtbar)"
+        layer['styling']['styles'][3]['pq_masks'][0]['values'] = [4,5,6,7]
+        layer['styling']['styles'][4]['name'] += "_masked45672"
+        layer['styling']['styles'][4]['title'] += " (4,5,6,7,2 sichtbar)"
+        layer['styling']['styles'][4]['pq_masks'][0]['values'] = [4,5,6,7,2]
+
 scl = {
     "title": "Sentinel-2 Scene Classification Layer (SCL)",
     "name": "s2_l2a_scl",
